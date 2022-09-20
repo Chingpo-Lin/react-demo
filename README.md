@@ -3,20 +3,20 @@
 # practicing srcs are saved in react_scaffolding/all_src folder
 # self-learn react demo includes following:
 
-# usage of state, props, and ref
+* usage of state, props, and ref
 
-# react functional/class(mainly used) component 
+* react functional/class(mainly used) component 
 
-# react lifetime
+* react lifetime
 
-# Todo list demo for combining usage of state, props, and ref
+* Todo list demo for combining usage of state, props, and ref
 
-# axios&fetch
+* axios&fetch
 
-# github user search demo
+* github user search demo
 
-# route components and API inside route components
+* route components and API inside route components
 
-# redux
+* redux
 
-# calculate sum&people List demos and shared data with redux
+* calculate sum&people List demos and shared data with redux
