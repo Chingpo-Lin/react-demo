@@ -1,7 +1,7 @@
 # react-demo
 
-# practicing srcs are saved in react_scaffolding/all_src folder
-# self-learn react demo includes following:
+### practicing srcs are saved in react_scaffolding/all_src folder
+### self-learn react demo includes following:
 
 * usage of state, props, and ref
 
