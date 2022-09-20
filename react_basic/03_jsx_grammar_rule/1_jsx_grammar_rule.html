@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+    <style>
+        .title {
+            background-color: orange;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+
+        const myId = 'atguiGu'
+        const myData = 'hello,reACT'
+
+        // 1. create virtual dom (convert jsx to html auto)
+        const VDOM = (
+            <div>
+                <h2 className="title" id={myId.toLowerCase()}>
+                    <span style={{color:'white', fontSize: '30px'}}>{myData.toLocaleLowerCase()}</span>
+                </h2>
+                <h2 className="title" id={myId.toUpperCase() + "2"}>
+                    <span style={{color:'white', fontSize: '30px'}}>{myData.toLocaleLowerCase()}</span>
+                </h2>
+                <input type="test"/>
+                <good>123</good>
+     
+            </div>
+
+        )
+
+        // rendor virtual dom to page
+        ReactDOM.render(VDOM, document.getElementById('test'))
+
+        /*
+            jsx rule:
+            1. define virtual dom wihout quotation mark
+            2. use {} to introduce js expression inside tag
+            3. don't use class in css, use className
+            4. inline style(内联样式) need to use style={{key:value, key:value...}}
+            5. virtual dom must only have one root tag
+            6. tag must close
+            7. tag first letter:
+                (1). if lowercase starts, convert that tag into html tag with same name, report error if not exists in html
+                (2). if uppercase starts, react will rendor corresponding component, if not defined, report error
+        */
+
+    </script>
+</body>
+
+</html>

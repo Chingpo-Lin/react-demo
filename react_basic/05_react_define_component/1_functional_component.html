@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // 1. create functional component
+        function MyComponent() {
+            console.log(this); // this is undefined cause babel open strict mode cannot get current window
+            return <h2>I'm functional component  (used for easy defination of component)</h2>
+        }
+
+        // 2. render(渲染) virtual dom to page
+        ReactDOM.render(<MyComponent/>, document.getElementById('test'))
+
+        /*
+            what happens after render?
+            1. react analyze component tag, find mycomponent component.
+            2. find component use functional define, and use that function to convert virtual dom to real and show in page.
+        */
+
+    </script>
+</body>
+
+</html>

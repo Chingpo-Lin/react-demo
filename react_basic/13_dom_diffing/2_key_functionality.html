@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>React Demo</title>
+</head>
+<body>
+	<!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/new/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/new/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/new/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+
+		/*
+			1) key functionality?
+			2) why we often don't use index in key
+
+			1. key is mark for virture dom, functional in update display
+		*/
+
+		/*
+			slow replay -- use index for key
+				initial data: 
+					{id:1,name:'xiaozhang',age:18},
+					{id:2,name:'xiaoli',age:19}
+				initial virtual dom:
+					<li key=0> xiaozhang --- 18}</li>
+					<li key=1> xiaoli --- 19</li>
+
+				update data: 
+					{id:3,name:'wang',age:20}
+					{id:1,name:'xiaozhang',age:18},
+					{id:2,name:'xiaoli',age:19}
+				update virtual dom:
+					<li key=0> wang --- 20</li>
+					<li key=1> xiaozhang --- 18}</li>
+					<li key=2> xiaoli --- 19</li>
+
+
+		*/
+		class Person extends React.Component {
+
+			state = {
+				persons: [
+					{id:1,name:'xiaozhang',age:18},
+					{id:2,name:'xiaoli',age:19}
+				]
+			}
+
+			add = () => {
+				const {persons} = this.state
+				const p = {id: persons.length + 1,name:'wang',age:20}
+				this.setState({persons:[p,...persons]})
+			}
+
+			render() {
+				return (
+					<div>
+						<h2>display people:</h2>
+						<button onClick={this.add}>add a person</button>
+						<h3>use index as key</h3>
+						<ul>
+							{
+								this.state.persons.map((personObj, index) => {
+									return <li key={index}> {personObj.name} --- {personObj.age}</li>
+								})
+							}
+						</ul>
+						<hr/>
+						<hr/>
+
+						<h3>use id as key</h3>
+						<ul>
+							{
+								this.state.persons.map((personObj, index) => {
+									return <li key={personObj.id}> {personObj.name} --- {personObj.age}</li>
+								})
+							}
+						</ul>
+					</div>
+				)
+			}
+		}
+
+		ReactDOM.render(<Person/>,document.getElementById('test'))
+</script>
+</body>
+</html>

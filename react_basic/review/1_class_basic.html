@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        /*
+            summary
+            1. class constructor is not necessary, need when need initialize data or add attribute
+            2. if A class extend b, and A has constructor, super need call at first
+            3. method is place on prototype
+        */
+        // create a person class 
+        class Person {
+            // constructor method 
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+
+            // normal method
+            speak() {
+                // where is speak method? -- class prototype object
+                // who use speak method? -- instance
+                console.log(`i am ${this.name}, with age ${this.age}`);
+            }
+        }
+
+         // create a instantialized person object
+        // const p1 = new Person('tom', 18)
+        // const p2 = new Person('jerry', 19)
+
+        // p1.speak()
+        // p2.speak()
+        // p1.speak.call({a:1,b:2}); // undefined, because call change this pointer
+
+        // console.log(p2);
+            
+        class Student extends Person {
+            constructor(name, age, grade) {
+                super(name, age)
+                this.grade = grade
+            }
+
+            // overwrite 
+            speak() {
+                console.log(`i am ${this.name}, with age ${this.age}, in grade ${this.grade}`);
+                this.study()
+            }
+
+            study() {
+                console.log('I study very hard')
+            }
+        }
+
+        // const s1 = new Student('bob', 15, 'senior')
+        // s1.speak()
+        // s1.study()
+        // console.log(s1)
+
+        class Car {
+            constructor(name, price) {
+                this.name = name
+                this.price = price
+            }
+            // class can just write value assign
+            // attribute of car instance with name: a, value: 1
+            a = 1
+            wheel = 4
+            static demo = 100 // add to class itself
+        }
+        const c1 = new Car('bmw', 199)
+        const c2 = new Car('bmw2', 299)
+        console.log(c1);
+    </script>
+</body>
+</html>

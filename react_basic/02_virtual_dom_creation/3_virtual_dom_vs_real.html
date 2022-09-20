@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+    <div id="demo"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // 1. create virtual dom 
+        const VDOM = ( /* no need to write "", since it's not string */
+            <h1 id="title">
+                <span>Hello, React</span>
+            </h1>
+        )
+
+        // 2. render(渲染) virtual dom to page
+        ReactDOM.render(VDOM,document.getElementById('test'))
+
+    
+        console.log('virtual dom', VDOM) // an object
+        console.log(typeof(VDOM)) // object
+        console.log(VDOM instanceof Object) // true
+
+        const TDOM = document.getElementById('demo')
+        console.log('true dom', TDOM)
+        debugger;
+        
+            /*
+                according to virtual dom
+                1. instance is object
+                2. virtual dom has fewer attribute, real dom has more 
+                because virtual dom is used by inner react, don't need that much attributes
+                3. virtual will be convert to real dom shown in page
+            */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // create component 
+        class Demo extends React.Component {
+
+            state = {isHot: true}
+
+            // recall call one time when initial
+            showInfo = () => {
+                const {input1} = this
+                alert(input1.value)
+            }
+
+            change = () => {
+                const {isHot} = this.state
+                this.setState({isHot:!isHot})
+            }
+
+            // in this way, method save in instance, so will not call 2 times
+            saveInput = (c) => {
+                this.input1 = c;
+                console.log('@', c)
+            }
+
+            // recall call one time when initial
+            // recall will call 2 times after render is called because clear and set again
+            render() {
+                const {isHot} = this.state
+                return (
+                    <div>
+                        <h2>today is very {isHot ? 'hot': 'cold'}</h2>
+                        {/* this way use frequent <input ref={(c) => {this.input1 = c; console.log('@', c)}} type="text"/>&nbsp;*/}
+                        <input ref={this.saveInput} type="text"/><br/><br/>
+                        <button onClick={this.showInfo}>click me show data</button>&nbsp;
+                        <button onClick={this.change}>change weather</button>
+                    </div>
+                )
+            }
+        }
+
+        // render
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

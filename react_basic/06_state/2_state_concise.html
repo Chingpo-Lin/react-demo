@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+
+        class Weather extends React.Component {
+            // initialize state 
+            state = {isHot: false, wind:'windy'}
+            
+            render() {
+                const {isHot, wind} = this.state
+                return <h1 onClick={this.demo}> today is {isHot ? 'hot' : 'cold'}, today is {wind} </h1>
+            }
+
+            // self defined method 
+            // need to use value assign + arrow function, otherwise this will be undefined
+            changeWeather = () => {
+                const isHot = this.state.isHot
+                this.setState({isHot: !isHot})
+            }
+        }
+        
+        ReactDOM.render(<Weather/>, document.getElementById('test'))
+   
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // create component 
+        class Demo extends React.Component {
+
+            /*
+                onXxx create event handle(notice capital letter)
+                    1. react use custom event instead of original -- for better compatibility
+                    2. react event is consigned(委托) to outest element to handle -- high efficiency (ul + li, give ul on click)
+                DOM element object is getten by event.target -- don't overuse Ref
+
+            */
+
+            myRef = React.createRef()
+            myRef2 = React.createRef()
+
+            // show left enter data
+            showData = () => {
+                alert(this.myRef.current.value)
+            }
+
+            // when to emit ref? -- when element we want to emit is what it happen (onblur happen on input tag)
+            showData2 = (event) => {
+                alert(event.target.value)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input ref={this.myRef} type="text" placeholder="click button show data"/>&nbsp;
+                        <button onClick={this.showData}>click me show left data</button>&nbsp;
+                        <input onBlur={this.showData2} type="text" placeholder="lose focus on data"/>&nbsp;
+                    </div>
+                )
+            }   
+        }
+
+        // render
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

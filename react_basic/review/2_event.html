@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">button 1</button>
+    <button id="btn2">button 2</button>
+    <button onclick="demo()">button 3</button>
+    <script type="text/javascript">
+        const btn1 = document.getElementById('btn1')
+        btn1.addEventListener('click', () => {
+            alert('button1 is clicked')
+        })
+
+        const btn12= document.getElementById('btn2')
+        btn2.onclick = () => {
+            alert('btn2 is clicked')
+        }
+
+        function demo() {
+            alert('btn3 is clicked')
+        }
+
+        
+    </script>
+</body>
+</html>

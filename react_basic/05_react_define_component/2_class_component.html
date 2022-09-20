@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // 1. create class component
+        class MyComponent extends React.Component {
+            render() {
+                // where is render? -- MyComponent prototype for instance use 
+                // what is this? -- MyComponent component instance
+                console.log('this inside render: ', this)
+                return <h2> I am class defined component (used for complicated defination of component) </h2>
+            }
+        }
+
+        // 2. render component
+        // <MyComponent/> will auto new 
+        ReactDOM.render(<MyComponent/>, document.getElementById('test'))
+
+        /*
+            what happens after render?
+            1. react analyze component tag, find mycomponent component.
+            2. find component use class define, new that instance, and call prototype render method by that instance
+            3. convert returned virtual dom to real, and show in page
+        */
+       
+    </script>
+</body>
+
+</html>

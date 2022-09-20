@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // create component 
+        class Demo extends React.Component {
+
+            // show left enter data
+            showData = () => {
+                // console.log(this.refs.input1)
+                const {input1} = this
+                alert(input1.value)
+            }
+
+            // show right data
+            showData2 = () => {
+                const {input2} = this
+                alert(input2.value)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input ref={c => this.input1 = c} type="text" placeholder="click button show data"/>&nbsp;
+                        <button onClick={this.showData}>click me show left data</button>&nbsp;
+                        <input ref={c => this.input2 = c} onBlur={this.showData2} type="text" placeholder="lose focus show data"/>
+                    </div>
+                )
+            }
+        }
+
+        // render
+        ReactDOM.render(<Demo/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

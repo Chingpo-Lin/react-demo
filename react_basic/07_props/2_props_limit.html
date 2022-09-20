@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <!-- prepare a container -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- introduce react main library (react)-->
+    <script type="text/javascript" src="../js/react.development.js"></script> 
+
+    <!-- introduct react-dom, to support operation on dom (react dom)-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <!-- introduce babel, convert jsx to js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- introduce prop-types, use for component tag attribute limitation -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel"> /* here need to write babel */ 
+        // create component
+        class Person extends React.Component {
+            render() {
+                const {name, age, sex} = this.props
+                // props is read only, this code reports error
+                // this.props.name = 'jack'
+                return (
+                    <ul>
+                        <li>name: {name}</li>
+                        <li>sex: {sex}</li>
+                        <li>age: {age+1}</li>
+                    </ul>
+                )
+            }
+        }
+
+        // limite ag attribute type and neccessity
+        Person.propTypes = {
+            name:PropTypes.string.isRequired, // limit name neccessary, and string
+            sex:PropTypes.string, // limit sex to be string
+            age:PropTypes.number, // limit age to be number
+            speak:PropTypes.func // limit speak to be function
+        }
+
+        // set default value of props
+        Person.defaultProps = {
+            sex: "not sure", // default sex
+            age: -1 // defau;t age
+        }
+        
+        const p = {name:'Tom',age:18,sex:'male'}
+        console.log('@', ...p) // only can be used for tag attribute assign
+        ReactDOM.render(<Person {...p}/>, document.getElementById('test1'))
+
+        ReactDOM.render(<Person name="Lily" speak={speak}/>, document.getElementById('test2'))
+        ReactDOM.render(<Person name="Bob" age={20} sex="male"/>, document.getElementById('test3'))
+
+        function speak() {
+            console.log('I speak');
+        }
+    </script>
+</body>
+
+</html>

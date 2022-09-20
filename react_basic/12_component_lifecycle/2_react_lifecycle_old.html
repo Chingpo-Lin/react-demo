@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Demo</title>
+</head>
+<body>
+     <!-- prepare a container -->
+     <div id="test"></div>
+
+     <!-- introduce react main library (react)-->
+     <script type="text/javascript" src="../js/react.development.js"></script> 
+ 
+     <!-- introduct react-dom, to support operation on dom (react dom)-->
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+ 
+     <!-- introduce babel, convert jsx to js -->
+     <script type="text/javascript" src="../js/babel.min.js"></script>
+ 
+     <script type="text/babel"> /* here need to write babel */ 
+     
+        // create component
+        class Count extends React.Component {
+
+            constructor(props) {
+                console.log("count--constructor is called");
+                super(props)
+                this.state = {count: 0}
+            }
+
+            add = () => {
+                // get state
+                const {count} = this.state
+                this.setState({count:count + 1})
+            }
+
+            unmount = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+            force = () => {
+                this.forceUpdate()
+            }
+
+            componentWillMount() {
+                console.log("count--component will mount")
+            }
+
+            componentDidMount() {
+                console.log("count--component did mount")
+            }
+
+            componentWillUnMount() {
+                console.log("count--component will unmount")
+            }
+
+            shouldComponentUpdate() {
+                console.log("count--should component update")
+                return false
+            }
+
+            componentWillUpdate() {
+                console.log("count--component will update")
+            }
+
+            componentDidUpdate() {
+                console.log("count--component did update")
+            }
+
+            render() {
+                console.log("count--render is called")
+                const {count} = this.state
+                return (
+                    <div>
+                        <h2>current sum: {count}</h2>
+                        <button onClick={this.add}>click to add 1</button>
+                        <button onClick={this.unmount}>unmount component here</button>
+                        <button onClick={this.force}>force update</button>
+                    </div>
+                )
+            }
+        }
+
+        class A extends React.Component {
+            // initial state
+            state = {carName:'bmw'}
+
+            changeCar = () => {
+                this.setState({carName: this.state.carName === 'bmw2'? 'bmw': 'bmw2'})
+            }
+            render() {
+                return (
+                    <div>
+                        <div>I am A</div>
+                        <button onClick={this.changeCar}>click to change car</button>
+                        <B carName={this.state.carName}/>
+                    </div>
+                )
+            }
+        }
+
+        class B extends React.Component {
+
+            componentDidMount() {
+                console.log('B --- component did mount')
+            }
+
+            // first time load will not call this 
+            componentWillReceiveProps() {
+                console.log('B --- component will receive props')
+            }
+
+            render() {
+                return (
+                    <div>I am B, car is: {this.props.carName}</div>
+                )
+            }
+        }
+
+        // render
+        ReactDOM.render(<A/>, document.getElementById('test'))
+     </script>
+</body>
+</html>
